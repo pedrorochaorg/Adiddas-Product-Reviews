@@ -1,17 +1,17 @@
 buildscript {
 
-	repositories {
-		mavenCentral()
-		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
-		jcenter()
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        jcenter()
 
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("com.avast.gradle:gradle-docker-compose-plugin:${dockerComposePlugin}")
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("com.avast.gradle:gradle-docker-compose-plugin:${dockerComposePlugin}")
 
-	}
+    }
 }
 
 apply plugin: 'java'
@@ -26,38 +26,38 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
-	maven { url "https://repo.spring.io/snapshot" }
-	maven { url "https://repo.spring.io/milestone" }
-	jcenter()
-	maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    jcenter()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 
 }
 
 
 dependencies {
 
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version:springBootVersion
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb-reactive', version:springBootVersion
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:springBootVersion
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version:springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb-reactive', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: springBootVersion
 
 
-	compile group: 'io.springfox', name: 'springfox-swagger2', version:springfoxSwaggerVersion
-	compile group: 'io.springfox', name: 'springfox-spring-webflux', version:springfoxSwaggerVersion
-	compile group: 'io.springfox', name: 'springfox-swagger-ui', version:springfoxSwaggerVersion
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwaggerVersion
+    compile group: 'io.springfox', name: 'springfox-spring-webflux', version: springfoxSwaggerVersion
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springfoxSwaggerVersion
 
-	compileOnly group: 'org.projectlombok', name: 'lombok'
+    compileOnly group: 'org.projectlombok', name: 'lombok'
 
-	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:springBootVersion
-	testCompile group: 'io.projectreactor', name:'reactor-test'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
+    testCompile group: 'io.projectreactor', name: 'reactor-test'
 
 }
 
 
 dockerCompose {
-	useComposeFiles = ['docker-compose.yml']
-	removeImages = "All"
+    useComposeFiles = ['docker-compose.yml']
+    removeImages = "All"
 }
 
 bootRun.dependsOn(composeUp)
