@@ -1,0 +1,68 @@
+package com.adidas.products.reviews.components;
+
+import java.util.Map;
+import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.reactive.function.server.ServerRequest;
+
+/**
+ * Global Error Attributes POJO.
+ *
+ * @author pedrorocha
+ **/
+public class GlobalErrorAttributes extends DefaultErrorAttributes {
+
+    private HttpStatus status = HttpStatus.BAD_REQUEST;
+    private String message = "please provide a name";
+
+    /**
+     * Instantiate a new GlobalErrorAtrributes object.
+     */
+    public GlobalErrorAttributes() {
+        super(false);
+    }
+
+    @Override
+    public Map<String, Object> getErrorAttributes(ServerRequest request, boolean includeStackTrace) {
+        Map<String, Object> map = super.getErrorAttributes(request, includeStackTrace);
+        map.put("status", getStatus());
+        map.put("message", getMessage());
+        return map;
+    }
+
+    /**
+     * Returns the error http status code
+     *
+     * @return the status
+     */
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the error http status code
+     *
+     * @param status the status to set
+     */
+    public void setStatus(HttpStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Returns the error message
+     *
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * Sets the error message
+     *
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}

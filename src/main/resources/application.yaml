@@ -1,0 +1,31 @@
+spring:
+  data:
+    mongodb:
+      username: root
+      password: example
+      database: reviews
+      port: 27017
+      host: localhost
+      authentication-database: admin
+  security:
+    basic-auth:
+      - username: user
+        password: password
+        roles:
+          - ROLE_USER
+      - username: admin
+        password: password
+        roles:
+          - ROLE_USER
+          - ROLE_ADMIN
+    api-keys:
+      - name: productApi
+        key: b0265933-055a-4939-87c7-4495fc777068
+        roles:
+          - ROLE_API_REVIEW_ADMIN
+
+logging:
+  level:
+    root: INFO
+    com.adidas.products.reviews: DEBUG
+    org.springframework: INFO
