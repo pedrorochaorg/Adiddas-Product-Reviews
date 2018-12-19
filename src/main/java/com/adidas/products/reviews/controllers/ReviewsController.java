@@ -118,6 +118,9 @@ public class ReviewsController implements IReviewsController {
         return reviewService.findById(id)
                 .flatMap(existingReview -> {
                     existingReview.setName(review.getName());
+                    existingReview.setEmail(review.getEmail());
+                    existingReview.setComment(review.getComment());
+                    existingReview.setScore(review.getScore());
                     return reviewService.save(existingReview);
                 })
                 .map(updatedReview -> new ResponseEntity<>((Object)updatedReview, HttpStatus.OK))

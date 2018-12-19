@@ -28,7 +28,7 @@ apply plugin: 'groovy'
 apply plugin: 'project-report'
 
 group = 'com.adidas.products'
-version = '0.0.1-SNAPSHOT'
+version = ''
 sourceCompatibility = 1.8
 
 repositories {
@@ -93,8 +93,8 @@ dockerCompose {
 // Source: https://github.com/dev9com/gradle-example/blob/master/build.gradle
 test {
     useTestNG() {
-
-        //Here is where you can add listeners for testng and add the reporting for reportng
+        
+        //Here is where you can add listeaners for testng and add the reporting for reportng
         listeners << 'org.uncommons.reportng.HTMLReporter'
         listeners << 'org.uncommons.reportng.JUnitXMLReporter'
         outputDirectory = file("$project.projectDir/reports/tests")

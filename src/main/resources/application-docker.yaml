@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   data:
     mongodb:
@@ -7,7 +9,17 @@ spring:
       port: 27017
       host: mongodb
       authentication-database: admin
-
+  security:
+    basic-auth:
+      - username: user
+        password: password
+        roles:
+          - ROLE_USER
+      - username: admin
+        password: admin
+        roles:
+          - ROLE_USER
+          - ROLE_ADMIN
 logging:
   level:
     root: INFO
