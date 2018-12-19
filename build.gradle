@@ -31,9 +31,6 @@ group = 'com.adidas.products'
 version = ''
 sourceCompatibility = 1.8
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10'
-}
 
 repositories {
     mavenCentral()
@@ -140,6 +137,11 @@ task initTest (dependsOn: ['composeUp', 'cleanTest']) {
 task endTest (dependsOn:  ['composeDown', 'jacocoTestReport']) {
     
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.10'
+}
+
 
 test.dependsOn(initTest)
 test.finalizedBy(endTest)
