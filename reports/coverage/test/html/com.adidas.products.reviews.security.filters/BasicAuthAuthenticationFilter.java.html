@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicAuthAuthenticationFilter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ReviewsApi</a> &gt; <a href="index.source.html" class="el_package">com.adidas.products.reviews.security.filters</a> &gt; <span class="el_source">BasicAuthAuthenticationFilter.java</span></div><h1>BasicAuthAuthenticationFilter.java</h1><pre class="source lang-java linenums">package com.adidas.products.reviews.security.filters;
+
+import com.adidas.products.reviews.security.AuthenticationManager;
+import com.adidas.products.reviews.security.models.ApiKeyAuthentication;
+import com.adidas.products.reviews.security.models.BasicAuthAuthentication;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
+import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
+import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
+import org.springframework.security.web.server.authentication.ServerAuthenticationEntryPointFailureHandler;
+import org.springframework.security.web.server.context.ServerSecurityContextRepository;
+import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatcher;
+import org.springframework.util.StringUtils;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
+
+/**
+ * Api Key Authentication filter, catches requests that contain an Authorization header with a starting value of APIKEY,
+ * an tries to authenticate the subject against a list of know authorities.
+ *
+ * @author pedrorocha
+ **/
+<span class="fc" id="L33">@Slf4j</span>
+public class BasicAuthAuthenticationFilter extends AuthenticationWebFilter {
+
+    private final ServerAuthenticationEntryPoint entryPoint;
+    private final ServerSecurityContextRepository repository;
+
+    /**
+     * Instantiates a new Api Authentication Filter, injecting the required dependencies.
+     *
+     * @param manager    ReactiveAuthenticationManager
+     * @param repository ServerSecurityContextRepository
+     * @param entryPoint ServerAuthenticationEntryPoint
+     */
+    public BasicAuthAuthenticationFilter(
+            ReactiveAuthenticationManager manager,
+            ServerSecurityContextRepository repository,
+            ServerAuthenticationEntryPoint entryPoint
+    ) {
+<span class="fc" id="L51">        super(manager);</span>
+<span class="fc" id="L52">        log.debug(&quot;Init BasicAuthFilter&quot;);</span>
+<span class="fc" id="L53">        this.repository = repository;</span>
+<span class="fc" id="L54">        this.entryPoint = entryPoint;</span>
+<span class="fc" id="L55">        this.setRequiresAuthenticationMatcher(new BasicAuthExchangeMatcher());</span>
+<span class="fc" id="L56">        this.setServerAuthenticationConverter(new BasicAuthAuthenticationConverter());</span>
+<span class="fc" id="L57">        this.setAuthenticationFailureHandler(new ServerAuthenticationEntryPointFailureHandler(entryPoint));</span>
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * Api Key Authentication converter , converts request headers in authentication manager data.
+     */
+    @AllArgsConstructor
+    private class BasicAuthAuthenticationConverter implements ServerAuthenticationConverter {
+        private final String BASIC = &quot;Basic &quot;;
+        private final Predicate&lt;String&gt; matchBearerLength
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">                = authValue -&gt; authValue.length() &gt; BASIC.length();</span>
+        private final Function&lt;String, String&gt; isolateBearerValue
+<span class="fc" id="L69">                = authValue -&gt; authValue.substring(BASIC.length(), authValue.length());</span>
+
+        @Override
+        public Mono&lt;Authentication&gt; convert(ServerWebExchange exchange) {
+<span class="fc" id="L73">            log.debug(&quot;Convert&quot;);</span>
+
+<span class="fc" id="L75">            return Mono.justOrEmpty(exchange)</span>
+<span class="fc" id="L76">                    .map(this::getKeyFromRequest)</span>
+<span class="fc" id="L77">                    .filter(Objects::nonNull)</span>
+<span class="fc" id="L78">                    .filter(matchBearerLength)</span>
+<span class="fc" id="L79">                    .map(isolateBearerValue)</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">                    .filter(token -&gt; !StringUtils.isEmpty(token))</span>
+<span class="fc" id="L81">                    .map(BasicAuthAuthentication::new)</span>
+<span class="fc" id="L82">                    .map(auth -&gt; (Authentication)auth)</span>
+<span class="fc" id="L83">                    .filter(Objects::nonNull);</span>
+
+        }
+
+        private String getKeyFromRequest(ServerWebExchange exchange) {
+<span class="fc" id="L88">            String key = exchange.getRequest()</span>
+<span class="fc" id="L89">                    .getHeaders()</span>
+<span class="fc" id="L90">                    .getFirst(HttpHeaders.AUTHORIZATION);</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">            return StringUtils.isEmpty(key) ? Strings.EMPTY : key;</span>
+        }
+    }
+
+    /**
+     * Checks if a request is targeted to this filter.
+     */
+<span class="fc" id="L98">    private class BasicAuthExchangeMatcher implements ServerWebExchangeMatcher {</span>
+        @Override
+        public Mono&lt;MatchResult&gt; matches(final ServerWebExchange exchange) {
+<span class="fc" id="L101">            log.debug(&quot;Check For Header&quot;);</span>
+
+<span class="fc" id="L103">            Mono&lt;ServerHttpRequest&gt; request = Mono.just(exchange).map(ServerWebExchange::getRequest);</span>
+            /* Check for header &quot;Authorization&quot; */
+<span class="fc" id="L105">            return request.map(ServerHttpRequest::getHeaders)</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">                    .filter(h -&gt; h.containsKey(HttpHeaders.AUTHORIZATION)</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">                            &amp;&amp; h.getFirst(HttpHeaders.AUTHORIZATION).startsWith(&quot;Basic&quot;)</span>
+                    )
+<span class="fc" id="L109">                    .flatMap($ -&gt; MatchResult.match())</span>
+<span class="fc" id="L110">                    .switchIfEmpty(MatchResult.notMatch());</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

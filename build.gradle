@@ -4,6 +4,7 @@ buildscript {
         mavenCentral()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2" }
         jcenter()
 
     }
@@ -13,13 +14,18 @@ buildscript {
 
     }
 }
+plugins {
+    id 'jacoco'
+    id 'io.franzbecker.gradle-lombok' version '1.11'
+}
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'docker-compose'
-
+apply plugin: 'groovy'
+apply plugin: 'project-report'
 
 group = 'com.adidas.products'
 version = '0.0.1-SNAPSHOT'
@@ -42,6 +48,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: springBootVersion
 
+    compile group: 'com.google.inject', name: 'guice', version: '3.0'
 
     compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwaggerVersion
     compile group: 'io.springfox', name: 'springfox-spring-webflux', version: springfoxSwaggerVersion
@@ -49,16 +56,108 @@ dependencies {
 
     compileOnly group: 'org.projectlombok', name: 'lombok'
 
+    testCompile group: 'org.assertj', name: 'assertj-core', version: assertjVersion
+    testCompile group: 'org.testng', name: 'testng', version: testngVersion
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
     testCompile group: 'io.projectreactor', name: 'reactor-test'
+    testCompile group: 'org.uncommons', name: 'reportng', version: reportngVersion
 
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$project.projectDir/src/main/java"]
+        }
+        resources {
+            srcDirs = ["$project.projectDir/src/main/resources"]
+        }
+    }
+    test {
+        java {
+            srcDirs = ["$project.projectDir/src/test/java"]
+        }
+        resources {
+            srcDirs = ["$project.projectDir/src/test/resources"]
+        }
+    }
+}
 
 dockerCompose {
     useComposeFiles = ['docker-compose.yml']
     removeImages = "All"
 }
 
+
+
+// Source: https://github.com/dev9com/gradle-example/blob/master/build.gradle
+test {
+    useTestNG() {
+
+        //Here is where you can add listeners for testng and add the reporting for reportng
+        listeners << 'org.uncommons.reportng.HTMLReporter'
+        listeners << 'org.uncommons.reportng.JUnitXMLReporter'
+        outputDirectory = file("$project.projectDir/reports/tests")
+    }
+
+    //Disable the default groovy html reports since ReportNG is being used
+    reports.html.enabled = true
+
+    //Interceptors
+    beforeTest { desc ->
+        println "\n*** Starting execution of test ${desc.className}.${desc.name} ***"
+    }
+    afterTest { descriptor, result ->
+        println "<<< Test ${descriptor.name} resulted in ${result.resultType} and took "+getElaspedTime(result.endTime - result.startTime)+" >>>\n"
+    }
+
+    //Modify the test logging
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat "full"
+    }
+
+    jacoco {
+        append = false
+        destinationFile = file("$project.projectDir/build/jacoco/test.exec")
+    }
+
+}
+jacoco {
+    toolVersion = "0.8.2"
+    reportsDir = file("$project.projectDir/reports/coverage")
+}
+
+
+task initTest (dependsOn: ['composeUp', 'cleanTest']) {
+
+}
+
+task endTest (dependsOn:  ['composeDown', 'jacocoTestReport']) {
+    
+}
+
+test.dependsOn(initTest)
+test.finalizedBy(endTest)
+
 bootRun.dependsOn(composeUp)
 bootRun.finalizedBy(composeDown)
+
+//Example of being able to use methods inside the build file
+def getElaspedTime(def time) {
+
+    if(time / 1000 < 1)
+    {
+        return String.format("0 min, %.3f sec", time/1000)
+    }
+    else
+    {
+        return String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes(time),
+                TimeUnit.MILLISECONDS.toSeconds(time) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time))
+
+        )
+    }
+}
+

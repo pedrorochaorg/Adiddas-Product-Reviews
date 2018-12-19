@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductScoreServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ReviewsApi</a> &gt; <a href="index.source.html" class="el_package">com.adidas.products.reviews.services.impl</a> &gt; <span class="el_source">ProductScoreServiceImpl.java</span></div><h1>ProductScoreServiceImpl.java</h1><pre class="source lang-java linenums">package com.adidas.products.reviews.services.impl;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+
+import com.adidas.products.reviews.models.ProductScore;
+import com.adidas.products.reviews.models.Review;
+import com.adidas.products.reviews.services.ProductScoreService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
+
+/**
+ * Implements the product score service methods based on its interface.
+ *
+ * @author pedrorocha
+ **/
+@Service
+<span class="fc" id="L24">@Slf4j</span>
+public class ProductScoreServiceImpl implements ProductScoreService {
+
+    private final MongoOperations operations;
+
+    /**
+     * Instantiates this object injecting the required dependencies.
+     *
+     * @param mongoOperations instance of the mongo operations object to execute queries in the db.
+     */
+    public ProductScoreServiceImpl(
+            MongoOperations mongoOperations
+<span class="fc" id="L36">    ) {</span>
+<span class="fc" id="L37">        this.operations = mongoOperations;</span>
+<span class="fc" id="L38">    }</span>
+
+    @Override
+    public Mono&lt;ProductScore&gt; findById(String id) {
+
+
+<span class="fc" id="L44">        AggregationResults&lt;ProductScore&gt; results = operations.aggregate(newAggregation(Review.class,</span>
+<span class="fc" id="L45">                match(where(&quot;productId&quot;).is(id)),</span>
+<span class="fc" id="L46">                group()</span>
+<span class="fc" id="L47">                        .count().as(&quot;numberOfReviews&quot;)</span>
+<span class="fc" id="L48">                        .avg(&quot;score&quot;).as(&quot;averageReviewScore&quot;)</span>
+        ), ProductScore.class);
+<span class="fc" id="L50">        ProductScore score = results.getUniqueMappedResult();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (score != null) {</span>
+<span class="fc" id="L52">            score.setProductId(id);</span>
+<span class="fc" id="L53">            return Mono.just(score);</span>
+        }
+<span class="fc" id="L55">        return Mono.just(ProductScore.builder().productId(id).averageReviewScore(0.0).numberOfReviews((long)0).build());</span>
+
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

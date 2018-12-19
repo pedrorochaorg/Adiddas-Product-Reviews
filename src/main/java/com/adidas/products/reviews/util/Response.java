@@ -33,19 +33,20 @@ public final class Response {
      * @param response Server Http Response instance
      * @param statusCode HttpStatus code to use
      * @param object object to reply with
-     * @param <T> Serializable object
      */
-    public static <T> void replyWith(ServerHttpResponse response, HttpStatus statusCode, T object) {
+    public static <T> Mono<Void> replyWith(ServerHttpResponse response, HttpStatus statusCode, T object) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
             byte[] bytes = mapper.writeValueAsString(object).getBytes(StandardCharsets.UTF_8);
             response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-            response.setStatusCode(statusCode);
             DataBuffer buffer = response.bufferFactory().wrap(bytes);
-            response.writeWith(Mono.just(buffer));
-        } catch (IOException ex) {
+            response.setStatusCode(statusCode);
+            return response.writeWith(Mono.just(buffer));
+
+        } catch (Exception ex) {
             log.debug("ReplyWith: {}", ex.getMessage());
         }
+        return null;
     }
 }

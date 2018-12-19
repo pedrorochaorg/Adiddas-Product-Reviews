@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+  <title>Test Results Report - Gradle test</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="description" content="TestNG unit test results." />
+  <link href="reportng.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="reportng.js"></script>
+</head>
+<body>
+<h1>Gradle test</h1>
+<p>
+  Test duration: 12.465s
+</p>
+
+
+
+
+
+  <table class="resultsTable">
+    <tr><th colspan="3" class="header passed">Passed Tests</th></tr>
+          <tr>
+        <td colspan="3" class="group">com.adidas.products.reviews.controllers.ReviewsControllerTest</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  createReview_tryToCreateANewReviewWithApiKeyAuth_HasToSucceed
+      </td>
+  <td class="duration">
+    0.333s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  createReview_tryToCreateANewReviewWithBasicAuth_HasToSucceed
+      </td>
+  <td class="duration">
+    0.032s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  createReview_tryToCreateANewReviewWithFakeApiKeyAuth_HasToFail
+      </td>
+  <td class="duration">
+    0.017s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  createReview_tryToCreateANewReviewWithFakeBasicAuth_HasToFail
+      </td>
+  <td class="duration">
+    0.011s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  createReview_tryToCreateANewReviewWithouthAuth_HasToFailWithAnUnauthorizedBodyMessage
+      </td>
+  <td class="duration">
+    0.021s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  getAllReviews_ifThereAreNoReviews_ReturnAnEmptySet
+      </td>
+  <td class="duration">
+    0.671s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  getAllReviews_ifThereAreReviewsThatDoNotMatchASpecificProductId_ReturnAnEmptySet
+      </td>
+  <td class="duration">
+    0.082s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  getAllReviews_ifThereAreReviewsThatMatchASpecificProductId_ReturnTheSameReviews
+      </td>
+  <td class="duration">
+    0.025s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  getAllReviews_ifThereAreReviews_ReturnTheReviews
+      </td>
+  <td class="duration">
+    0.134s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  getReview_ifThReviewExists_HasToReturnTheReview
+      </td>
+  <td class="duration">
+    0.036s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  getReview_ifTheReviewDoesntExists_HasToReturn404NotFound
+      </td>
+  <td class="duration">
+    0.015s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  getScore_ifNoReviewsExists_HasToReturnAnEmptyScore
+      </td>
+  <td class="duration">
+    0.052s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  getScore_ifReviewsExists_HasToReturnTheRightScore
+      </td>
+  <td class="duration">
+    0.140s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+          <tr>
+        <td colspan="3" class="group">com.adidas.products.reviews.services.ReviewServiceTest</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  findAll_IfThereAreRecords_allDocumentsAreReturned
+      </td>
+  <td class="duration">
+    0.240s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  findAll_IfTheresNoRecordsReturned_anEmptylObjectIsReturned
+      </td>
+  <td class="duration">
+    0.005s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  findById_IfTheresAMatchInDocumentStore_aReviewWithAMatchingIdIsReturned
+      </td>
+  <td class="duration">
+    0.053s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  findById_IfTheresNotAMatchInDocumentStore_anEmptylObjectIsReturned
+      </td>
+  <td class="duration">
+    0.002s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+          <tr>
+        <td colspan="3" class="group">com.adidas.products.reviews.util.ResponseTest</td>
+      </tr>
+            
+<tr>
+  <td class="method">
+                  replyWith_ifAllFieldsAreNull_returnNull
+      </td>
+  <td class="duration">
+    0.007s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  replyWith_ifHttpStatusIsNull_returnMonoPeak
+      </td>
+  <td class="duration">
+    0.003s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  replyWith_ifObjectIsNull_returnMonoPeak
+      </td>
+  <td class="duration">
+    0.001s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+<tr>
+  <td class="method">
+                  replyWith_ifServerHttpResponseIsNull_returnNull
+      </td>
+  <td class="duration">
+    0.001s
+  </td>
+  <td class="result">
+        
+    
+        
+
+      </td>
+</tr>
+      </table>
+  
+</body>
+</html>

@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
  * @author pedrorocha
  **/
 @ToString(callSuper = true)
-public class BasicAuthAuthentication extends UsernamePasswordAuthenticationToken {
+public class BasicAuthAuthentication extends PreAuthenticatedAuthenticationToken {
 
     /**
      * Instantiates a new BasicAuthAuthentication object.

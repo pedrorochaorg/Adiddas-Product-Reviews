@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import javax.validation.constraints.Min;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * ErrorResponse model, used for marshaling and unmarshaling data from/to json while interacting with REST endpoints.
@@ -15,6 +16,7 @@ import lombok.Data;
  **/
 @ApiModel(description = "ErrorResponse Model Object")
 @Data
+@ToString
 public class ErrorResponse implements Serializable {
 
     @Min(value = 0)

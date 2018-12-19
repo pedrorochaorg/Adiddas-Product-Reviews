@@ -32,7 +32,7 @@ public class BasicAuthAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String basicAuth = (String) authentication.getPrincipal();
-        log.debug("BasicAuthProvider");
+        log.debug("BasicAuthProvider: {}", basicAuth);
 
         if (basicAuth == null || basicAuth.isEmpty()) {
             throw new BadCredentialsException(INVALID_BASIC_AUTH);
@@ -40,13 +40,19 @@ public class BasicAuthAuthenticationProvider implements AuthenticationProvider {
 
         String[] credentials = extractAndDecodeHeader(basicAuth);
 
+        log.debug("BasicAuthProvider: {}", credentials[0]);
+        log.debug("BasicAuthProvider: {}", credentials[1]);
 
         BasicAuth basicAuthObject = config.getByUsername(credentials[0]);
-        if (basicAuthObject == null) {
+
+        if (basicAuthObject == null || !basicAuthObject.getPassword().equals(credentials[1])) {
             throw new BadCredentialsException(INVALID_BASIC_AUTH);
         }
+        log.debug("BasicAuthProvider: {}", basicAuthObject.toString());
+
 
         String authorities = String.join(",", basicAuthObject.getRoles());
+        log.debug("BasicAuthProvider: {}", authorities);
         return new BasicAuthAuthentication(
                 new Identity(
                         basicAuthObject.getUsername(),

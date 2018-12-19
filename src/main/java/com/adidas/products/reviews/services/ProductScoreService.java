@@ -23,10 +23,5 @@ public interface ProductScoreService {
      */
     Mono<ProductScore> findById(String id);
 
-    /**
-     * Performns an asyncronous calculation of the product score.
-     */
-    @Async
-    void calculateScore(String id);
 
 }

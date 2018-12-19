@@ -65,7 +65,7 @@ public interface IReviewsController {
             @ApiResponse(code = 500, message = Rest.INTERNAL_SERVER_ERROR, response = ErrorResponse.class)
     })
     @RequestMapping(path = "/review/{product_id}/{id}", method = RequestMethod.GET, produces = Rest.CONTENT_FORMAT)
-    Mono<ResponseEntity<Review>> getReview(
+    Mono<ResponseEntity<Object>> getReview(
             @ApiParam(required = true, value = "Product Unique identifier")
             @PathVariable(name = "product_id") final String productId,
             @ApiParam(required = true, value = "Review Unique identifier")
@@ -142,7 +142,7 @@ public interface IReviewsController {
             produces = Rest.CONTENT_FORMAT,
             consumes = Rest.CONTENT_FORMAT
     )
-    Mono<ResponseEntity<Review>> updateReview(
+    Mono<ResponseEntity<Object>> updateReview(
             @ApiParam(required = true, value = "Product Unique identifier")
             @PathVariable(name = "product_id") final String productId,
             @ApiParam(required = true, value = "Review Unique identifier")
@@ -175,7 +175,7 @@ public interface IReviewsController {
             produces = Rest.CONTENT_FORMAT,
             consumes = Rest.CONTENT_FORMAT
     )
-    Mono<ResponseEntity<Void>> deleteReview(
+    Mono<ResponseEntity<Object>> deleteReview(
             @ApiParam(required = true, value = "Product Unique identifier")
             @PathVariable(name = "product_id") final String productId,
             @ApiParam(required = true, value = "Review Unique identifier")

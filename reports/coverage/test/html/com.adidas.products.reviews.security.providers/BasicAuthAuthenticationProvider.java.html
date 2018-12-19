@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicAuthAuthenticationProvider.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ReviewsApi</a> &gt; <a href="index.source.html" class="el_package">com.adidas.products.reviews.security.providers</a> &gt; <span class="el_source">BasicAuthAuthenticationProvider.java</span></div><h1>BasicAuthAuthenticationProvider.java</h1><pre class="source lang-java linenums">package com.adidas.products.reviews.security.providers;
+
+import static com.adidas.products.reviews.common.messages.Rest.INVALID_API_KEY;
+import static com.adidas.products.reviews.common.messages.Rest.INVALID_BASIC_AUTH;
+
+import com.adidas.products.reviews.config.BasicAuthConfig;
+import com.adidas.products.reviews.config.models.BasicAuth;
+import com.adidas.products.reviews.security.models.BasicAuthAuthentication;
+import com.adidas.products.reviews.security.models.Identity;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.AuthorityUtils;
+
+/**
+ * Basic Auth authentication manager, performs authentication based on an request containing a BasicAuthAuthentication
+ * object.
+ *
+ * @author pedrorocha
+ **/
+@AllArgsConstructor
+<span class="fc" id="L27">@Slf4j</span>
+public class BasicAuthAuthenticationProvider implements AuthenticationProvider {
+
+    private final BasicAuthConfig config;
+
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+<span class="fc" id="L34">        String basicAuth = (String) authentication.getPrincipal();</span>
+<span class="fc" id="L35">        log.debug(&quot;BasicAuthProvider: {}&quot;, basicAuth);</span>
+
+<span class="pc bpc" id="L37" title="2 of 4 branches missed.">        if (basicAuth == null || basicAuth.isEmpty()) {</span>
+<span class="nc" id="L38">            throw new BadCredentialsException(INVALID_BASIC_AUTH);</span>
+        }
+
+<span class="fc" id="L41">        String[] credentials = extractAndDecodeHeader(basicAuth);</span>
+
+<span class="fc" id="L43">        log.debug(&quot;BasicAuthProvider: {}&quot;, credentials[0]);</span>
+<span class="fc" id="L44">        log.debug(&quot;BasicAuthProvider: {}&quot;, credentials[1]);</span>
+
+<span class="fc" id="L46">        BasicAuth basicAuthObject = config.getByUsername(credentials[0]);</span>
+
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">        if (basicAuthObject == null || !basicAuthObject.getPassword().equals(credentials[1])) {</span>
+<span class="fc" id="L49">            throw new BadCredentialsException(INVALID_BASIC_AUTH);</span>
+        }
+<span class="fc" id="L51">        log.debug(&quot;BasicAuthProvider: {}&quot;, basicAuthObject.toString());</span>
+
+
+<span class="fc" id="L54">        String authorities = String.join(&quot;,&quot;, basicAuthObject.getRoles());</span>
+<span class="fc" id="L55">        log.debug(&quot;BasicAuthProvider: {}&quot;, authorities);</span>
+<span class="fc" id="L56">        return new BasicAuthAuthentication(</span>
+                new Identity(
+<span class="fc" id="L58">                        basicAuthObject.getUsername(),</span>
+<span class="fc" id="L59">                        basicAuthObject.getPassword(),</span>
+<span class="fc" id="L60">                        AuthorityUtils.commaSeparatedStringToAuthorityList(authorities)</span>
+                ),
+<span class="fc" id="L62">                basicAuthObject.getPassword(),</span>
+<span class="fc" id="L63">                AuthorityUtils.commaSeparatedStringToAuthorityList(authorities)</span>
+        );
+
+    }
+
+    @Override
+    public boolean supports(Class&lt;?&gt; authentication) {
+<span class="fc" id="L70">        return authentication.equals(BasicAuthAuthentication.class);</span>
+    }
+
+    private String[] extractAndDecodeHeader(String base64String) throws BadCredentialsException {
+<span class="fc" id="L74">        byte[] base64Token = base64String.getBytes(StandardCharsets.UTF_8);</span>
+        byte[] decoded;
+<span class="fc" id="L76">        String token = &quot;&quot;;</span>
+        try {
+<span class="fc" id="L78">            decoded = Base64.getDecoder().decode(base64Token);</span>
+<span class="fc" id="L79">            token = new String(decoded, StandardCharsets.UTF_8);</span>
+
+<span class="nc" id="L81">        } catch (IllegalArgumentException ex) {</span>
+<span class="nc" id="L82">            throw new BadCredentialsException(</span>
+                    INVALID_BASIC_AUTH
+            );
+<span class="fc" id="L85">        }</span>
+
+<span class="fc" id="L87">        int delimiter = token.indexOf(&quot;:&quot;);</span>
+
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (delimiter == -1) {</span>
+<span class="nc" id="L90">            throw new BadCredentialsException(</span>
+                    INVALID_BASIC_AUTH
+            );
+        }
+
+<span class="fc" id="L95">        return new String[]{token.substring(0, delimiter), token.substring(delimiter + 1)};</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

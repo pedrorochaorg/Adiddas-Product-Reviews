@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Review.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ReviewsApi</a> &gt; <a href="index.source.html" class="el_package">com.adidas.products.reviews.models</a> &gt; <span class="el_source">Review.java</span></div><h1>Review.java</h1><pre class="source lang-java linenums">package com.adidas.products.reviews.models;
+
+import com.adidas.products.reviews.common.messages.Reviews;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Date;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+/**
+ * Review model class, used to marshal/unmarshal data from/to mongodb and json. This model was based on the assumption
+ * that every user can place a product review, if we require an user to be authenticated before posting a product
+ * review, this model could be reviewed to include the user unique identifier as a required property.
+ *
+ * @author pedrorocha
+ **/
+@Data
+@ApiModel(description = &quot;Review Model Object&quot;)
+@Document(collection = &quot;reviews&quot;)
+@Builder
+@ToString
+@EqualsAndHashCode
+public class Review implements Serializable {
+
+    @Id
+    @ApiModelProperty(
+            dataType = &quot;String&quot;,
+            example = &quot;C77154&quot;,
+            name = &quot;id&quot;
+    )
+    @JsonPropertyDescription(&quot;Review unique identifier&quot;)
+    private String id;
+
+    @Indexed(name = &quot;productId&quot;)
+    @ApiModelProperty(
+            dataType = &quot;String&quot;,
+            example = &quot;C1235&quot;,
+            name = &quot;productId&quot;
+    )
+    @JsonPropertyDescription(&quot;Product unique identifier&quot;)
+    private String productId;
+
+    @NotBlank(message = Reviews.INVALID_NAME)
+    @Size(max = 60, message = Reviews.INVALID_NAME)
+    @ApiModelProperty(
+            dataType = &quot;String&quot;,
+            example = &quot;John Doe&quot;,
+            name = &quot;name&quot;,
+            required = true
+    )
+    @Pattern(regexp = &quot;^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$&quot;, message = Reviews.INVALID_NAME)
+    @JsonPropertyDescription(&quot;User name&quot;)
+    private String name;
+
+    @NotBlank(message = Reviews.INVALID_EMAIL)
+    @Size(max = 90, message = Reviews.INVALID_EMAIL)
+    @ApiModelProperty(
+            dataType = &quot;String&quot;,
+            example = &quot;john.doe@example.com&quot;,
+            name = &quot;email&quot;,
+            required = true
+    )
+    @Email(message = Reviews.INVALID_EMAIL)
+    @JsonPropertyDescription(&quot;User email address&quot;)
+    private String email;
+
+    @Indexed(name = &quot;score&quot;)
+    @NotNull(message = Reviews.INVALID_SCORE)
+    @ApiModelProperty(
+            dataType = &quot;Decimal&quot;,
+            example = &quot;4.0&quot;,
+            name = &quot;score&quot;,
+            required = true
+    )
+    @DecimalMin(value = &quot;0.0&quot;, message = Reviews.INVALID_SCORE)
+    @DecimalMax(value = &quot;5.0&quot;, message = Reviews.INVALID_SCORE)
+    @JsonPropertyDescription(&quot;Review score&quot;)
+    private Double score;
+
+
+    @Size(max = 270, message = Reviews.INVALID_COMMENT)
+    @ApiModelProperty(
+            dataType = &quot;String&quot;,
+            example = &quot;I've loved this product, sure i would buy it again&quot;,
+            name = &quot;comment&quot;,
+            required = true
+    )
+    @JsonPropertyDescription(&quot;Comment made by the reviewer&quot;)
+    private String comment;
+
+
+    @ApiModelProperty(
+            dataType = &quot;Date&quot;,
+            name = &quot;createdAt&quot;,
+            readOnly = true
+    )
+    @Builder.Default
+    private Date createdAt = new Date();
+
+
+    /**
+     * Simplified object constructor.
+     */
+<span class="fc" id="L123">    public Review() {</span>
+<span class="fc" id="L124">    }</span>
+
+    /**
+     * Instantiates a new Review object.
+     *
+     * @param id        review unique identifier
+     * @param productId product identifier
+     * @param name      user name
+     * @param email     user email
+     * @param score     user voted score
+     * @param comment   user comment
+     * @param createdAt date of review
+     */
+    public Review(
+            String id,
+            @NotBlank(message = Reviews.INVALID_PRODUCT_ID)
+                    String productId,
+            @NotBlank(message = Reviews.INVALID_NAME)
+            @Size(max = 60, message = Reviews.INVALID_NAME)
+            @Pattern(regexp = &quot;^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$&quot;, message = Reviews.INVALID_NAME)
+                    String name,
+            @NotBlank(message = Reviews.INVALID_EMAIL)
+            @Size(max = 90, message = Reviews.INVALID_EMAIL)
+            @Email(message = Reviews.INVALID_EMAIL)
+                    String email,
+            @NotNull(message = Reviews.INVALID_SCORE)
+            @Min(value = 0, message = Reviews.INVALID_SCORE)
+            @Max(value = 5, message = Reviews.INVALID_SCORE)
+                    Double score,
+            @Size(max = 270, message = Reviews.INVALID_COMMENT)
+                    String comment,
+            @NotNull
+                    Date createdAt
+<span class="fc" id="L157">    ) {</span>
+
+
+<span class="fc" id="L160">        this.id = id;</span>
+<span class="fc" id="L161">        this.productId = productId;</span>
+<span class="fc" id="L162">        this.name = name;</span>
+<span class="fc" id="L163">        this.email = email;</span>
+<span class="fc" id="L164">        this.score = score;</span>
+<span class="fc" id="L165">        this.comment = comment;</span>
+<span class="fc" id="L166">        this.createdAt = createdAt;</span>
+<span class="fc" id="L167">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

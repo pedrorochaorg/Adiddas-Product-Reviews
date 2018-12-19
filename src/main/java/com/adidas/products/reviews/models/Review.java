@@ -1,6 +1,9 @@
 package com.adidas.products.reviews.models;
 
 import com.adidas.products.reviews.common.messages.Reviews;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,6 +20,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -32,6 +37,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ApiModel(description = "Review Model Object")
 @Document(collection = "reviews")
 @Builder
+@ToString
+@EqualsAndHashCode
 public class Review implements Serializable {
 
     @Id
@@ -44,7 +51,6 @@ public class Review implements Serializable {
     private String id;
 
     @Indexed(name = "productId")
-    @NotBlank(message = Reviews.INVALID_PRODUCT_ID)
     @ApiModelProperty(
             dataType = "String",
             example = "C1235",

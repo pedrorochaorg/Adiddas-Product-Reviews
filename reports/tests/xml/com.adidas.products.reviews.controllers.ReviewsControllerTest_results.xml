@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Gradle test"
+           tests="13"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="1.569">
+  <properties />
+  
+  
+            <testcase name="getScore_ifNoReviewsExists_HasToReturnAnEmptyScore" time="0.052" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="createReview_tryToCreateANewReviewWithFakeBasicAuth_HasToFail" time="0.011" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="getReview_ifTheReviewDoesntExists_HasToReturn404NotFound" time="0.015" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="createReview_tryToCreateANewReviewWithApiKeyAuth_HasToSucceed" time="0.333" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="createReview_tryToCreateANewReviewWithouthAuth_HasToFailWithAnUnauthorizedBodyMessage" time="0.021" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="getAllReviews_ifThereAreReviews_ReturnTheReviews" time="0.134" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="createReview_tryToCreateANewReviewWithFakeApiKeyAuth_HasToFail" time="0.017" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="createReview_tryToCreateANewReviewWithBasicAuth_HasToSucceed" time="0.032" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="getReview_ifThReviewExists_HasToReturnTheReview" time="0.036" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="getAllReviews_ifThereAreReviewsThatDoNotMatchASpecificProductId_ReturnAnEmptySet" time="0.082" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="getAllReviews_ifThereAreReviewsThatMatchASpecificProductId_ReturnTheSameReviews" time="0.025" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="getAllReviews_ifThereAreNoReviews_ReturnAnEmptySet" time="0.671" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+                <testcase name="getScore_ifReviewsExists_HasToReturnTheRightScore" time="0.140" classname="com.adidas.products.reviews.controllers.ReviewsControllerTest" />
+      
+</testsuite>

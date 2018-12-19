@@ -4,9 +4,6 @@ import com.adidas.products.reviews.models.Review;
 import com.adidas.products.reviews.repositories.ReviewRepository;
 import com.adidas.products.reviews.services.ProductScoreService;
 import com.adidas.products.reviews.services.ReviewService;
-import javax.sound.sampled.ReverbType;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,16 +17,14 @@ import reactor.core.publisher.Mono;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ProductScoreService scoreService;
 
     /**
      * Instantiates this object injecting the required dependencies.
-     * @param productScoreService instance of the product score service
-     * @param reviewRepository instance of the review repository
+     *
+     * @param reviewRepository    instance of the review repository
      */
-    public ReviewServiceImpl(ProductScoreService productScoreService, ReviewRepository reviewRepository) {
+    public ReviewServiceImpl(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
-        this.scoreService = productScoreService;
     }
 
     @Override
@@ -49,21 +44,17 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Mono<Review> findByIdAndProductId(String productId, String id) {
-        return this.reviewRepository.findByIdAndProductId(productId,id);
+        return this.reviewRepository.findByIdAndProductId(productId, id);
     }
 
     @Override
     public Mono<Review> save(final Review review) {
-        Mono<Review> reviewMono = this.reviewRepository.save(review);
-        reviewMono.subscribe(review1 -> this.scoreService.calculateScore(review1.getProductId()));
-        return reviewMono;
+        return this.reviewRepository.save(review);
     }
 
     @Override
     public Mono<Void> delete(final Review review) {
 
-        Mono<Void> reviewMono = this.reviewRepository.delete(review);
-        reviewMono.subscribe(review1 -> this.scoreService.calculateScore(review.getProductId()));
-        return reviewMono;
+        return this.reviewRepository.delete(review);
     }
 }

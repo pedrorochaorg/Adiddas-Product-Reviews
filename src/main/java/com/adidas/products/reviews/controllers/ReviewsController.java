@@ -1,6 +1,7 @@
 package com.adidas.products.reviews.controllers;
 
 import com.adidas.products.reviews.common.messages.Rest;
+import com.adidas.products.reviews.models.ErrorResponse;
 import com.adidas.products.reviews.models.ProductScore;
 import com.adidas.products.reviews.models.Review;
 import com.adidas.products.reviews.services.ProductScoreService;
@@ -58,14 +59,14 @@ public class ReviewsController implements IReviewsController {
 
     @Override
     @RequestMapping(path = "/review/{product_id}/{id}", method = RequestMethod.GET, produces = Rest.CONTENT_FORMAT)
-    public Mono<ResponseEntity<Review>> getReview(
+    public Mono<ResponseEntity<Object>> getReview(
             @PathVariable(name = "product_id", required = true) final String productId,
             @PathVariable(name = "id", required = true) final String id) {
         log.info("getReview , productId: {}, id: {}", productId, id);
         return reviewService.findByIdAndProductId(productId, id)
-                .map(ResponseEntity::ok)
+                .map(review -> ResponseEntity.ok((Object)review))
                 .defaultIfEmpty(
-                        ResponseEntity.notFound().build()
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(Rest.OBJECT_NOT_FOUND))
                 );
     }
 
@@ -93,6 +94,8 @@ public class ReviewsController implements IReviewsController {
             @Valid @RequestBody Review review
     ) {
         log.info("createReview , productId: {}, review: {}", productId, review.toString());
+        review.setId(null);
+        review.setProductId(productId);
         return this.reviewService.save(review);
     }
 
@@ -104,19 +107,23 @@ public class ReviewsController implements IReviewsController {
             consumes = Rest.CONTENT_FORMAT
     )
     @PreAuthorize("hasAuthority('ROLE_API_REVIEW_ADMIN') or hasAuthority('ROLE_USER')")
-    public Mono<ResponseEntity<Review>> updateReview(
+    public Mono<ResponseEntity<Object>> updateReview(
             @PathVariable(name = "product_id") final String productId,
             @PathVariable(name = "id") final String id,
             @Valid @RequestBody Review review
     ) {
         log.info("updateReview , productId: {}, id: {}, review: {}", productId, id, review.toString());
+        review.setId(id);
+        review.setProductId(productId);
         return reviewService.findById(id)
                 .flatMap(existingReview -> {
                     existingReview.setName(review.getName());
                     return reviewService.save(existingReview);
                 })
-                .map(updatedReview -> new ResponseEntity<>(updatedReview, HttpStatus.OK))
-                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .map(updatedReview -> new ResponseEntity<>((Object)updatedReview, HttpStatus.OK))
+                .defaultIfEmpty(
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(Rest.OBJECT_NOT_FOUND))
+                );
     }
 
     @Override
@@ -127,7 +134,7 @@ public class ReviewsController implements IReviewsController {
             consumes = Rest.CONTENT_FORMAT
     )
     @PreAuthorize("hasAuthority('ROLE_API_REVIEW_ADMIN') or hasAuthority('ROLE_USER')")
-    public Mono<ResponseEntity<Void>> deleteReview(
+    public Mono<ResponseEntity<Object>> deleteReview(
             @PathVariable(name = "product_id") final String productId,
             @PathVariable(name = "id") final String id
     ) {
@@ -135,9 +142,11 @@ public class ReviewsController implements IReviewsController {
         return reviewService.findById(id)
                 .flatMap(existingReview ->
                         reviewService.delete(existingReview)
-                                .then(Mono.just(new ResponseEntity<Void>(HttpStatus.OK)))
+                                .then(Mono.just(new ResponseEntity<>(HttpStatus.OK)))
                 )
-                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .defaultIfEmpty(
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(Rest.OBJECT_NOT_FOUND))
+                );
 
     }
 }

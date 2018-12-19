@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReviewsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ReviewsApi</a> &gt; <a href="index.source.html" class="el_package">com.adidas.products.reviews.controllers</a> &gt; <span class="el_source">ReviewsController.java</span></div><h1>ReviewsController.java</h1><pre class="source lang-java linenums">package com.adidas.products.reviews.controllers;
+
+import com.adidas.products.reviews.common.messages.Rest;
+import com.adidas.products.reviews.models.ErrorResponse;
+import com.adidas.products.reviews.models.ProductScore;
+import com.adidas.products.reviews.models.Review;
+import com.adidas.products.reviews.services.ProductScoreService;
+import com.adidas.products.reviews.services.ReviewService;
+import javax.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+/**
+ * Reviews Service Rest Controller
+ *
+ * @author pedrorocha
+ **/
+@RestController
+<span class="fc" id="L29">@Slf4j</span>
+public class ReviewsController implements IReviewsController {
+
+    private final ReviewService reviewService;
+    private final ProductScoreService productScoreService;
+
+    /**
+     * Instantiates a new ReviewsController, implementing all interaface methods.
+     *
+     * @param reviewService instance to the review service
+     * @param productScoreService instance to the product score service
+     */
+    public ReviewsController(
+            ReviewService reviewService,
+            ProductScoreService productScoreService
+<span class="fc" id="L44">    ) {</span>
+<span class="fc" id="L45">        this.reviewService = reviewService;</span>
+<span class="fc" id="L46">        this.productScoreService = productScoreService;</span>
+<span class="fc" id="L47">    }</span>
+
+    @Override
+    @RequestMapping(path = &quot;/review&quot;, method = RequestMethod.GET, produces = Rest.CONTENT_FORMAT)
+    public Flux&lt;Review&gt; getAllReviews(@RequestParam(name = &quot;productId&quot;, required = false) final String productId) {
+<span class="fc" id="L52">        log.info(&quot;getAllReviews , productId: {}&quot;, productId);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (productId != null) {</span>
+<span class="fc" id="L54">            return reviewService.findByProductId(productId);</span>
+        }
+
+<span class="fc" id="L57">        return reviewService.findAll();</span>
+    }
+
+    @Override
+    @RequestMapping(path = &quot;/review/{product_id}/{id}&quot;, method = RequestMethod.GET, produces = Rest.CONTENT_FORMAT)
+    public Mono&lt;ResponseEntity&lt;Object&gt;&gt; getReview(
+            @PathVariable(name = &quot;product_id&quot;, required = true) final String productId,
+            @PathVariable(name = &quot;id&quot;, required = true) final String id) {
+<span class="fc" id="L65">        log.info(&quot;getReview , productId: {}, id: {}&quot;, productId, id);</span>
+<span class="fc" id="L66">        return reviewService.findByIdAndProductId(productId, id)</span>
+<span class="fc" id="L67">                .map(review -&gt; ResponseEntity.ok((Object)review))</span>
+<span class="fc" id="L68">                .defaultIfEmpty(</span>
+<span class="fc" id="L69">                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(Rest.OBJECT_NOT_FOUND))</span>
+                );
+    }
+
+    @Override
+    @RequestMapping(path = &quot;/review/{product_id}&quot;, method = RequestMethod.GET, produces = Rest.CONTENT_FORMAT)
+    public Mono&lt;ResponseEntity&lt;ProductScore&gt;&gt; getScore(@PathVariable(name = &quot;product_id&quot;) final String productId) {
+<span class="fc" id="L76">        log.info(&quot;getScore , productId: {}&quot;, productId);</span>
+<span class="fc" id="L77">        return productScoreService.findById(productId)</span>
+<span class="fc" id="L78">                .map(ResponseEntity::ok)</span>
+<span class="fc" id="L79">                .defaultIfEmpty(</span>
+<span class="fc" id="L80">                        ResponseEntity.notFound().build()</span>
+                );
+    }
+
+    @Override
+    @RequestMapping(
+            path = &quot;/review/{product_id}&quot;,
+            method = RequestMethod.POST,
+            produces = Rest.CONTENT_FORMAT,
+            consumes = Rest.CONTENT_FORMAT
+    )
+    @PreAuthorize(&quot;hasAuthority('ROLE_API_REVIEW_ADMIN') or hasAuthority('ROLE_USER')&quot;)
+    public Mono&lt;Review&gt; createReview(
+            @PathVariable(name = &quot;product_id&quot;) final String productId,
+            @Valid @RequestBody Review review
+    ) {
+<span class="fc" id="L96">        log.info(&quot;createReview , productId: {}, review: {}&quot;, productId, review.toString());</span>
+<span class="fc" id="L97">        review.setId(null);</span>
+<span class="fc" id="L98">        review.setProductId(productId);</span>
+<span class="fc" id="L99">        return this.reviewService.save(review);</span>
+    }
+
+    @Override
+    @RequestMapping(
+            path = &quot;/review/{product_id}/{id}&quot;,
+            method = RequestMethod.PUT,
+            produces = Rest.CONTENT_FORMAT,
+            consumes = Rest.CONTENT_FORMAT
+    )
+    @PreAuthorize(&quot;hasAuthority('ROLE_API_REVIEW_ADMIN') or hasAuthority('ROLE_USER')&quot;)
+    public Mono&lt;ResponseEntity&lt;Object&gt;&gt; updateReview(
+            @PathVariable(name = &quot;product_id&quot;) final String productId,
+            @PathVariable(name = &quot;id&quot;) final String id,
+            @Valid @RequestBody Review review
+    ) {
+<span class="nc" id="L115">        log.info(&quot;updateReview , productId: {}, id: {}, review: {}&quot;, productId, id, review.toString());</span>
+<span class="nc" id="L116">        review.setId(id);</span>
+<span class="nc" id="L117">        review.setProductId(productId);</span>
+<span class="nc" id="L118">        return reviewService.findById(id)</span>
+<span class="nc" id="L119">                .flatMap(existingReview -&gt; {</span>
+<span class="nc" id="L120">                    existingReview.setName(review.getName());</span>
+<span class="nc" id="L121">                    return reviewService.save(existingReview);</span>
+                })
+<span class="nc" id="L123">                .map(updatedReview -&gt; new ResponseEntity&lt;&gt;((Object)updatedReview, HttpStatus.OK))</span>
+<span class="nc" id="L124">                .defaultIfEmpty(</span>
+<span class="nc" id="L125">                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(Rest.OBJECT_NOT_FOUND))</span>
+                );
+    }
+
+    @Override
+    @RequestMapping(
+            path = &quot;/review/{product_id}/{id}&quot;,
+            method = RequestMethod.DELETE,
+            produces = Rest.CONTENT_FORMAT,
+            consumes = Rest.CONTENT_FORMAT
+    )
+    @PreAuthorize(&quot;hasAuthority('ROLE_API_REVIEW_ADMIN') or hasAuthority('ROLE_USER')&quot;)
+    public Mono&lt;ResponseEntity&lt;Object&gt;&gt; deleteReview(
+            @PathVariable(name = &quot;product_id&quot;) final String productId,
+            @PathVariable(name = &quot;id&quot;) final String id
+    ) {
+<span class="nc" id="L141">        log.info(&quot;deleteReview , productId: {}, id: {}&quot;, productId, id);</span>
+<span class="nc" id="L142">        return reviewService.findById(id)</span>
+<span class="nc" id="L143">                .flatMap(existingReview -&gt;</span>
+<span class="nc" id="L144">                        reviewService.delete(existingReview)</span>
+<span class="nc" id="L145">                                .then(Mono.just(new ResponseEntity&lt;&gt;(HttpStatus.OK)))</span>
+                )
+<span class="nc" id="L147">                .defaultIfEmpty(</span>
+<span class="nc" id="L148">                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(Rest.OBJECT_NOT_FOUND))</span>
+                );
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

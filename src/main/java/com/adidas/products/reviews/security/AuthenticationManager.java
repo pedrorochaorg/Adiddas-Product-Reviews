@@ -37,8 +37,10 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
                 try {
                     //The provider returns a full authenticated Authentication object.
                     //With authentication.setAuthenticated(true);
+                    log.debug("Authentication: {}", authentication.toString());
                     return Mono.just(provider.authenticate(authentication));
                 } catch (Exception e) {
+                    log.debug("Failed: {}",e.getMessage());
                     return Mono.error(new BadCredentialsException(INVALID_AUTHENTICATION_CREDENTIALS));
                 }
             }

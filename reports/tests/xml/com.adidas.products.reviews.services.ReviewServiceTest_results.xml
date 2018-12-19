@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Gradle test"
+           tests="4"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.300">
+  <properties />
+  
+  
+            <testcase name="findById_IfTheresNotAMatchInDocumentStore_anEmptylObjectIsReturned" time="0.002" classname="com.adidas.products.reviews.services.ReviewServiceTest" />
+                <testcase name="findAll_IfTheresNoRecordsReturned_anEmptylObjectIsReturned" time="0.005" classname="com.adidas.products.reviews.services.ReviewServiceTest" />
+                <testcase name="findAll_IfThereAreRecords_allDocumentsAreReturned" time="0.240" classname="com.adidas.products.reviews.services.ReviewServiceTest" />
+                <testcase name="findById_IfTheresAMatchInDocumentStore_aReviewWithAMatchingIdIsReturned" time="0.053" classname="com.adidas.products.reviews.services.ReviewServiceTest" />
+      
+</testsuite>

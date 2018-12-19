@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReviewServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ReviewsApi</a> &gt; <a href="index.source.html" class="el_package">com.adidas.products.reviews.services.impl</a> &gt; <span class="el_source">ReviewServiceImpl.java</span></div><h1>ReviewServiceImpl.java</h1><pre class="source lang-java linenums">package com.adidas.products.reviews.services.impl;
+
+import com.adidas.products.reviews.models.Review;
+import com.adidas.products.reviews.repositories.ReviewRepository;
+import com.adidas.products.reviews.services.ProductScoreService;
+import com.adidas.products.reviews.services.ReviewService;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+/**
+ * Implements the review service methods based on its interface.
+ *
+ * @author pedrorocha
+ **/
+@Service
+public class ReviewServiceImpl implements ReviewService {
+
+    private final ReviewRepository reviewRepository;
+
+    /**
+     * Instantiates this object injecting the required dependencies.
+     *
+     * @param reviewRepository    instance of the review repository
+     */
+<span class="fc" id="L26">    public ReviewServiceImpl(ReviewRepository reviewRepository) {</span>
+<span class="fc" id="L27">        this.reviewRepository = reviewRepository;</span>
+<span class="fc" id="L28">    }</span>
+
+    @Override
+    public Mono&lt;Review&gt; findById(String id) {
+<span class="fc" id="L32">        return this.reviewRepository.findById(id);</span>
+    }
+
+    @Override
+    public Flux&lt;Review&gt; findAll() {
+<span class="fc" id="L37">        return this.reviewRepository.findAll();</span>
+    }
+
+    @Override
+    public Flux&lt;Review&gt; findByProductId(String productId) {
+<span class="fc" id="L42">        return this.reviewRepository.findByProductId(productId);</span>
+    }
+
+    @Override
+    public Mono&lt;Review&gt; findByIdAndProductId(String productId, String id) {
+<span class="fc" id="L47">        return this.reviewRepository.findByIdAndProductId(productId, id);</span>
+    }
+
+    @Override
+    public Mono&lt;Review&gt; save(final Review review) {
+<span class="fc" id="L52">        return this.reviewRepository.save(review);</span>
+    }
+
+    @Override
+    public Mono&lt;Void&gt; delete(final Review review) {
+
+<span class="nc" id="L58">        return this.reviewRepository.delete(review);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

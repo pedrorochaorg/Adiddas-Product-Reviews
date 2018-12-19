@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicAuthAuthentication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ReviewsApi</a> &gt; <a href="index.source.html" class="el_package">com.adidas.products.reviews.security.models</a> &gt; <span class="el_source">BasicAuthAuthentication.java</span></div><h1>BasicAuthAuthentication.java</h1><pre class="source lang-java linenums">package com.adidas.products.reviews.security.models;
+
+import java.util.Collection;
+import lombok.ToString;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+
+/**
+ * Basic Auth Authentication Holder. Used to delegate authentication methods to the right authentication provider.
+ *
+ * @author pedrorocha
+ **/
+@ToString(callSuper = true)
+public class BasicAuthAuthentication extends PreAuthenticatedAuthenticationToken {
+
+    /**
+     * Instantiates a new BasicAuthAuthentication object.
+     *
+     * @param aPrincipal authentication principal.
+     */
+    public BasicAuthAuthentication(Object aPrincipal) {
+<span class="fc" id="L23">        super(aPrincipal, null);</span>
+<span class="fc" id="L24">        this.setAuthenticated(false);</span>
+<span class="fc" id="L25">    }</span>
+    /**
+     * Instantiates a new BasicAuthAuthentication object.
+     *
+     * @param aPrincipal authentication principal.
+     * @param aCredentials credentials.
+     */
+    public BasicAuthAuthentication(Object aPrincipal, Object aCredentials) {
+<span class="nc" id="L33">        super(aPrincipal, aCredentials);</span>
+<span class="nc" id="L34">        this.setAuthenticated(false);</span>
+<span class="nc" id="L35">    }</span>
+
+    /**
+     * Instantiates a new BasicAuthAuthentication object.
+     *
+     * @param aPrincipal authentication principal.
+     * @param aCredentials credentials.
+     * @param anAuthorities set of granted authorities.
+     */
+    public BasicAuthAuthentication(
+            Object aPrincipal,
+            Object aCredentials,
+            Collection&lt;? extends GrantedAuthority&gt; anAuthorities
+    ) {
+<span class="fc" id="L49">        super(aPrincipal, aCredentials, anAuthorities);</span>
+<span class="fc" id="L50">        this.setAuthenticated(true);</span>
+<span class="fc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

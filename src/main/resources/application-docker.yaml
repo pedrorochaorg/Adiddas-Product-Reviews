@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      username: root
+      password: example
+      database: reviews
+      port: 27017
+      host: mongodb
+      authentication-database: admin
+
+logging:
+  level:
+    root: INFO
+    com.adidas.products.reviews: INFO
+    org.springframework: INFO

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecurityConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ReviewsApi</a> &gt; <a href="index.source.html" class="el_package">com.adidas.products.reviews.config</a> &gt; <span class="el_source">SecurityConfig.java</span></div><h1>SecurityConfig.java</h1><pre class="source lang-java linenums">package com.adidas.products.reviews.config;
+
+import com.adidas.products.reviews.security.AuthenticationEntryPoint;
+import com.adidas.products.reviews.security.AuthenticationManager;
+import com.adidas.products.reviews.security.filters.ApiKeyAuthenticationFilter;
+import com.adidas.products.reviews.security.filters.BasicAuthAuthenticationFilter;
+import com.adidas.products.reviews.security.providers.ApiKeyAuthenticationProvider;
+import com.adidas.products.reviews.security.providers.BasicAuthAuthenticationProvider;
+import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
+import org.springframework.security.web.server.context.ServerSecurityContextRepository;
+import org.springframework.security.web.server.context.WebSessionServerSecurityContextRepository;
+
+/**
+ * Configures WebFlux security.
+ *
+ * @author pedrorocha
+ **/
+@Configuration
+@EnableWebFluxSecurity
+@EnableReactiveMethodSecurity(proxyTargetClass = true)
+<span class="fc" id="L33">public class SecurityConfig {</span>
+
+<span class="fc" id="L35">    private final ServerAuthenticationEntryPoint entryPoint = new AuthenticationEntryPoint();</span>
+<span class="fc" id="L36">    private final ServerSecurityContextRepository repository = new WebSessionServerSecurityContextRepository();</span>
+
+
+    @Bean
+    SecurityWebFilterChain springWebFilterChain(
+            ServerHttpSecurity http,
+            ReactiveAuthenticationManager manager,
+            @Qualifier(&quot;basicAuthProvider&quot;) AuthenticationProvider basicAuth,
+            @Qualifier(&quot;apiKeyAuthProvider&quot;) AuthenticationProvider apiKeyAuth
+    ) throws Exception {
+<span class="fc" id="L46">        return http</span>
+<span class="fc" id="L47">                .authorizeExchange()</span>
+<span class="fc" id="L48">                .anyExchange().permitAll()</span>
+<span class="fc" id="L49">                .and()</span>
+<span class="fc" id="L50">                .httpBasic().disable()</span>
+<span class="fc" id="L51">                .formLogin().disable()</span>
+<span class="fc" id="L52">                .csrf().disable()</span>
+<span class="fc" id="L53">                .logout().disable()</span>
+<span class="fc" id="L54">                .cors().and()</span>
+                //Override BasicAuthenticationEntryPoint
+<span class="fc" id="L56">                .exceptionHandling().authenticationEntryPoint(this.entryPoint)</span>
+<span class="fc" id="L57">                .and()</span>
+<span class="fc" id="L58">                .authenticationManager(manager)</span>
+<span class="fc" id="L59">                .addFilterAt(new ApiKeyAuthenticationFilter(manager,repository,entryPoint),</span>
+                        SecurityWebFiltersOrder.AUTHENTICATION)
+<span class="fc" id="L61">                .addFilterAt(new BasicAuthAuthenticationFilter(manager,repository,entryPoint),</span>
+                        SecurityWebFiltersOrder.AUTHENTICATION)
+<span class="fc" id="L63">                .build();</span>
+    }
+
+    @Bean(name = &quot;apiKeyAuthProvider&quot;)
+    AuthenticationProvider apiKeyAuthenticationProvider(ApiKeyConfig config) {
+<span class="fc" id="L68">        return new ApiKeyAuthenticationProvider(config);</span>
+    }
+
+    @Bean(name = &quot;basicAuthProvider&quot;)
+    AuthenticationProvider basicAuthAuthenticationProvider(BasicAuthConfig config) {
+<span class="fc" id="L73">        return new BasicAuthAuthenticationProvider(config);</span>
+    }
+
+    @Bean
+    ReactiveAuthenticationManager manager(
+            @Qualifier(&quot;basicAuthProvider&quot;) AuthenticationProvider basicAuth,
+            @Qualifier(&quot;apiKeyAuthProvider&quot;) AuthenticationProvider apiKeyAuth
+    ) {
+<span class="fc" id="L81">        return new AuthenticationManager(new ArrayList&lt;AuthenticationProvider&gt;() {{</span>
+<span class="fc" id="L82">            add(basicAuth);</span>
+<span class="fc" id="L83">            add(apiKeyAuth);</span>
+<span class="fc" id="L84">        }});</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

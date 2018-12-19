@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Gradle test"
+           tests="4"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.012">
+  <properties />
+  
+  
+            <testcase name="replyWith_ifAllFieldsAreNull_returnNull" time="0.007" classname="com.adidas.products.reviews.util.ResponseTest" />
+                <testcase name="replyWith_ifHttpStatusIsNull_returnMonoPeak" time="0.003" classname="com.adidas.products.reviews.util.ResponseTest" />
+                <testcase name="replyWith_ifObjectIsNull_returnMonoPeak" time="0.001" classname="com.adidas.products.reviews.util.ResponseTest" />
+                <testcase name="replyWith_ifServerHttpResponseIsNull_returnNull" time="0.001" classname="com.adidas.products.reviews.util.ResponseTest" />
+      
+</testsuite>
