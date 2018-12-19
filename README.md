@@ -22,7 +22,12 @@ To run/build this code your host must have:
 
 ## Additional Information
 
-This api supports 2 types of authentication
+This api supports 2 types of authentication, Basic Auth and Api Key authentication.
+
+Api docs OpenApi format are accessible to the following urls:
+
+- `http://<host>:8080/v2/api-docs`
+- `http://<host>:8080/swagger-ui-html`
 
 
 ## Building the code

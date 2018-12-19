@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono;
 @Api(
         value = "Reviews",
         description = "CRUD Operations on Review objects",
-        tags = {"Products", "Reviews"}
+        tags = {"Product Reviews"}
 )
 public interface IReviewsController {
 

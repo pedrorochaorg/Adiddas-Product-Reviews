@@ -2,38 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00d2f785-df70-4438-a831-479c12e078d1" name="Default Changelist" comment="E">
-      <change afterPath="$PROJECT_DIR$/lombok.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-docker.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/AbstractTestRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/controllers/ReviewsControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/services/ReviewServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/util/ResponseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.docker/service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/components/GlobalErrorAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/components/GlobalErrorAttributes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/components/GlobalErrorExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/components/GlobalErrorExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/components/UnauthorizedAuthenticationEntryPoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/SwaggerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/IReviewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/IReviewsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/ReviewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/ReviewsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/exceptions/Handler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/models/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/models/ErrorResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/models/ProductScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/models/ProductScore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/models/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/models/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/repositories/ProductScoreRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/AuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/AuthenticationEntryPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/AuthenticationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/AuthenticationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/models/BasicAuthAuthentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/models/BasicAuthAuthentication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/providers/BasicAuthAuthenticationProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/providers/BasicAuthAuthenticationProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/ProductScoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/ProductScoreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/impl/ProductScoreServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/impl/ProductScoreServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/impl/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/impl/ReviewServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/util/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/util/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/ReviewsApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/ReviewsApplicationTests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -116,10 +88,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/ReviewsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="83" column="13" lean-forward="true" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/controllers/ReviewsControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="301">
-              <caret line="300" lean-forward="true" selection-start-line="300" selection-end-line="300" />
+              <caret line="300" selection-start-line="300" selection-end-line="300" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#createReviewsService#1;class#ReviewsControllerTest#0" />
@@ -131,11 +115,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="42" column="98" selection-start-line="42" selection-start-column="98" selection-end-line="42" selection-end-column="98" />
+            <state relative-caret-position="170">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/IReviewsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="27" column="17" selection-start-line="27" selection-end-line="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,16 +140,16 @@
         <entry file="file://$PROJECT_DIR$/docker-compose.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+              <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+            <state relative-caret-position="335">
+              <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -161,11 +157,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/SwaggerConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+            <state relative-caret-position="245">
+              <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-spring-web/3.0.0-SNAPSHOT/1597c9806bb5c88b9bdba1f7c38bee4338702e12/springfox-spring-web-3.0.0-SNAPSHOT-sources.jar!/springfox/documentation/spring/web/plugins/ApiSelectorBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="50" column="35" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -178,33 +183,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/models/BasicAuth.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/ApiKeyConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/BasicAuthConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="43" column="38" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -286,7 +264,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/ProductScoreService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/impl/ReviewServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/models/ProductScore.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/IReviewsController.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/services/ReviewServiceTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/services/impl/ProductScoreServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/util/Base64.java" />
@@ -295,9 +272,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/ReviewsController.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/controllers/ReviewsControllerTest.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/SwaggerConfig.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/resources/application.yaml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/SwaggerConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/IReviewsController.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -322,11 +300,6 @@
             <path>
               <item name="ReviewsApi" type="b2602c69:ProjectViewProjectNode" />
               <item name="reviews" type="462c0819:PsiDirectoryNode" />
-              <item name=".docker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ReviewsApi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="reviews" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -340,7 +313,24 @@
               <item name="reviews" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ReviewsApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reviews" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="reviews" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ReviewsApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reviews" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="reviews" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -351,7 +341,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545184876757" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545185416482" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -475,7 +465,7 @@
     <frame x="0" y="23" width="1680" height="976" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8198758" visible="true" weight="0.25579977" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8198758" visible="true" weight="0.25579977" />
       <window_info id="Structure" order="1" sideWeight="0.17805383" side_tool="true" weight="0.25579977" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -489,7 +479,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.329849" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.329849" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.3379791" />
@@ -505,16 +495,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/AuthenticationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/security/AuthenticationEntryPoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -687,16 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/IReviewsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="144" column="30" selection-start-line="144" selection-start-column="30" selection-end-line="144" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.9.0/a0ad4e203304ccab7e01266fa814115850edb8a9/jackson-annotations-2.9.0-sources.jar!/com/fasterxml/jackson/annotation/JsonIgnoreProperties.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -769,16 +739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="688">
           <caret line="120" column="37" selection-start-line="120" selection-start-column="37" selection-end-line="120" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/ReviewsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1030">
-          <caret line="96" column="27" selection-start-line="96" selection-start-column="27" selection-end-line="96" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -859,16 +819,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/SwaggerConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/TaskExecutors.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -882,7 +832,7 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/com/adidas/products/reviews/controllers/ReviewsControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
-          <caret line="300" lean-forward="true" selection-start-line="300" selection-end-line="300" />
+          <caret line="300" selection-start-line="300" selection-end-line="300" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#createReviewsService#1;class#ReviewsControllerTest#0" />
@@ -893,24 +843,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="42" column="98" selection-start-line="42" selection-start-column="98" selection-end-line="42" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+        <state relative-caret-position="335">
+          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-spring-web/3.0.0-SNAPSHOT/1597c9806bb5c88b9bdba1f7c38bee4338702e12/springfox-spring-web-3.0.0-SNAPSHOT-sources.jar!/springfox/documentation/spring/web/plugins/ApiSelectorBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="50" column="35" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/config/SwaggerConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/IReviewsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="27" column="17" selection-start-line="27" selection-end-line="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/adidas/products/reviews/controllers/ReviewsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="83" column="13" lean-forward="true" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
