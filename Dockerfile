@@ -2,7 +2,7 @@ FROM openjdk:8-jdk
 
 EXPOSE 8080
 
-ADD reviews /code
+ADD . /code
 WORKDIR /code/products
 
 RUN ./gradlew clean build -x check  && cp /code/build/libs/ReviewsApi.jar /app.jar
