@@ -139,7 +139,7 @@
         <entry file="file://$PROJECT_DIR$/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -315,7 +315,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545200731282" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545200848982" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -439,7 +439,7 @@
     <frame x="0" y="23" width="1680" height="976" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8198758" visible="true" weight="0.25885227" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8198758" visible="true" weight="0.25885227" />
       <window_info id="Structure" order="1" sideWeight="0.17805383" side_tool="true" weight="0.25579977" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -453,7 +453,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.5087108" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.5087108" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.3379791" />
@@ -857,7 +857,7 @@
     <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
         </state>
       </provider>
     </entry>
