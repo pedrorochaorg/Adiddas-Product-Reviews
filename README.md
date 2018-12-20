@@ -7,6 +7,7 @@ Exercise to show case skills when developing java enabled microservices.
 - Java 8
 - Spring Boot 2.1.1
 - Spring 5 Webflux
+- Mongodb 3.X
 - Docker / Docker Compose 18.09.0
 - IntelliJ
 - Project Lombok
