@@ -15,7 +15,7 @@ RUN ls -la && \
     unzip -d /opt/gradle gradle-4.10.3-bin.zip && \
     ls /opt/gradle/gradle-4.10.3
 
-RUN export PATH=$PATH:/opt/gradle/gradle-4.10.3/bin
+ENV PATH=$PATH:/opt/gradle/gradle-4.10.3/bin
 
 RUN gradle clean build -x check && cp build/libs/ReviewsApi.jar /app.jar
 
